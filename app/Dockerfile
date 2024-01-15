@@ -12,7 +12,7 @@ ENV APP_HOME=${HOME}/web
 RUN mkdir -p $HOME && \
     addgroup --system app && \
     adduser --system --group app && \
-    mkdir $APP_HOME ${APP_HOME}/static
+    mkdir $APP_HOME ${APP_HOME}/static ${APP_HOME}/media
 
 # Set work directory
 WORKDIR $APP_HOME
