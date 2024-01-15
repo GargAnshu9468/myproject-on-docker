@@ -25,4 +25,4 @@ class Home(View):
             "file_url": file_url
         }
 
-        return render(request, "upload.html", context)
+        return render(request, "myapp/upload.html", context)
