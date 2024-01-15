@@ -1,0 +1,12 @@
+# Exclude Python compiled files
+*.pyc
+
+# Exclude Python cache directory
+__pycache__
+
+# Exclude macOS system files
+.DS_Store
+
+# Exclude environment-specific configuration files
+.env
+.env.db
