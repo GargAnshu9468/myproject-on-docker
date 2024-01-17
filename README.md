@@ -14,7 +14,21 @@ To install & start the docker service:
 To install & start the jenkins service:
 
     docker pull jenkins/jenkins
-    docker run -d -p 8080:8080 docker/jenkins/jenkins
+    docker network create jenkins
+
+    docker run \
+      --name jenkins-docker \
+      --rm \
+      --detach \
+      --privileged \
+      --network jenkins \
+      --network-alias docker \
+      --env DOCKER_TLS_CERTDIR=/certs \
+      --volume jenkins-docker-certs:/certs/client \
+      --volume jenkins-data:/var/jenkins_home \
+      --publish 8080:8080 \
+      docker:dind \
+      --storage-driver overlay2
 
 To adds the jenkins user to the docker group & then restart the jenkins service (if required):
 
@@ -31,10 +45,17 @@ To check the permissions and change the ownership of the docker socket and then 
     chown root:docker /var/run/docker.sock
     systemctl restart docker
 
-Create .env & .env.db files at:
+To get inside the jenkins container:
 
-    vi /var/lib/jenkins/workspace/myproject/.env
-    vi /var/lib/jenkins/workspace/myproject/.env.db
+    docker exec -it jenkins-docker /bin/bash
+
+To access all the jenkins workspaces:
+
+    cd /var/jenkins_home/workspace/
+
+To access all the project files inside the jenkins workspace:
+
+    cd /var/jenkins_home/workspace/myproject/
 
 To access the application files inside the container:
 
@@ -48,14 +69,6 @@ To access the database inside the container:
 To access the nginx configuration files inside the container:
 
     docker exec -it myproject-nginx-1 /bin/bash
-
-To access all the project files inside the workspace:
-
-    cd /var/lib/jenkins/workspace/myproject/
-
-To access all the workspaces:
-
-    cd /var/lib/jenkins/workspace/
 
 To run the migrations (manually):
 
