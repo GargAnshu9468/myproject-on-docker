@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('health-check/', views.health_check, name='health_check'),
-    path('', views.UploadMediaFile.as_view(), name='upload_media_file'),
+    path('', views.UploadMediaFiles.as_view(), name='upload_media_files'),
 ]
