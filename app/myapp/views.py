@@ -8,10 +8,10 @@ def health_check(request):
     return JsonResponse({'status': 'ok'})
 
 
-class UploadMediaFile(View):
+class UploadMediaFiles(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, "myapp/upload_media_file.html")
+        return render(request, "myapp/upload_media_files.html")
 
     def post(self, request, *args, **kwargs):
 
@@ -25,4 +25,4 @@ class UploadMediaFile(View):
             "file_url": file_url
         }
 
-        return render(request, "myapp/upload_media_file.html", context)
+        return render(request, "myapp/upload_media_files.html", context)
