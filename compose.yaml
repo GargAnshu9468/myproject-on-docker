@@ -3,8 +3,8 @@ services:
     build:
       context: ./app
     volumes:
-      - static_volume:/home/app/web/static
-      - media_volume:/home/app/web/media
+      - static-volume:/home/app/web/static
+      - media-volume:/home/app/web/media
     ports:
       - 8000:8000
     env_file:
@@ -14,20 +14,20 @@ services:
   db:
     image: postgres:16
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres-data:/var/lib/postgresql/data/
     env_file:
       - ./.env.db
   nginx:
     build: ./nginx
     volumes:
-      - static_volume:/home/app/web/static
-      - media_volume:/home/app/web/media
+      - static-volume:/home/app/web/static
+      - media-volume:/home/app/web/media
     ports:
       - 80:80
     depends_on:
       - web
 
 volumes:
-  postgres_data:
-  static_volume:
-  media_volume:
+  postgres-data:
+  static-volume:
+  media-volume:
