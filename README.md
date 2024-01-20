@@ -6,6 +6,10 @@ To become a root user:
 
     sudo su
 
+To update all packages:
+
+    yum update -y
+
 To install & start the docker service:
 
     yum install docker -y
